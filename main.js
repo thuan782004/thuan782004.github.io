@@ -1,14 +1,26 @@
-var g = 0.7
-var k = 0.05
-var h = 0
-var w = 0
+var g = 1.5;var k = 0.1;var h = 0;var w = 0
 var lc = new Date().getTime()
-var vx = 10
-var vy = 0
+var vx = 0;var vy = 0;cx = 0;cy = 0;
+var dragging = false
 $(document).ready(()=>{
     h = window.innerHeight-40
     w = window.innerWidth-40
     setInterval(tick, 20); 
+    $(".ball").on("mousedown",(e)=>{
+        $(this).on("mousemove",drag).on("mouseup",stop)
+        dragging = true; drag(e) 
+        vx = 0; vy = 0;
+        cx = e.clientX-20;
+        cy = e.clientY-20;
+        function drag(e){
+            $(".ball").css("top",e.clientY-20+"px")
+            $(".ball").css("left",e.clientX-20+"px")
+        }
+        function stop(){
+            $(this).off("mousemove").off("mouseup")
+            dragging = false
+        }
+    })
 })
 $(window).resize(()=>{
     h = window.innerHeight-40
@@ -20,6 +32,13 @@ $(window).resize(()=>{
 });
 
 function tick(){
+    if (dragging) {
+        cnx = $(".ball").css("left").slice(0,-2)-0;
+        cny = $(".ball").css("top").slice(0,-2)-0;
+        vx = cnx - cx; cx = cnx;
+        vy = cny - cy; cy = cny;
+        return
+    }
     vy+=g
     var ny = $(".ball").css("top").slice(0,-2)-0+vy
     if (ny>=h||ny<=0){ny=ny<=0?0:h;vy=-vy/Math.abs(vy)*(Math.abs(vy)*0.9) }
