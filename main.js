@@ -22,7 +22,7 @@ $(document).ready(()=>{
         }
         function stop(){
             console.log("end")
-            $("html").off("mousemove touchend").off("mouseup touchend")
+            $("html").off("mousemove touchmove").off("mouseup touchend")
             dragging = false
         }
     }
