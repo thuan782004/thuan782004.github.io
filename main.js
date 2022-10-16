@@ -6,7 +6,9 @@ $(document).ready(()=>{
     h = window.innerHeight-40
     w = window.innerWidth-40
     setInterval(tick, 20); 
-    $(".ball").on("mousedown",(e)=>{
+    $(".ball").on("mousedown",start)
+    $(".ball").on("touchstart",start)
+    function start(e) {
         $(this).on("mousemove",drag).on("mouseup",stop)
         dragging = true; drag(e) 
         vx = 0; vy = 0;
@@ -20,7 +22,7 @@ $(document).ready(()=>{
             $(this).off("mousemove").off("mouseup")
             dragging = false
         }
-    })
+    }
 })
 $(window).resize(()=>{
     h = window.innerHeight-40
