@@ -8,21 +8,35 @@ $(document).ready(()=>{
     setInterval(tick, 20); 
     $(".ball").on("mousedown touchstart",start)
     function start(e) {
+        getX(e)
+        console.log(e)
         $("html").on("mousemove touchmove",drag).on("mouseup touchend",stop)
         dragging = true; drag(e) 
         vx = 0; vy = 0;
-        cx = e.clientX-20;
-        cy = e.clientY-20;
+        cx = getX(e)-20;
+        cy = getY(e)-20;
         function drag(e){
-            $(".ball").css("top",e.clientY-20+"px")
-            $(".ball").css("left",e.clientX-20+"px")
+            // console.log("move")
+            $(".ball").css("top",getY(e)-20+"px")
+            $(".ball").css("left",getX(e)-20+"px")
         }
         function stop(){
+            console.log("end")
             $("html").off("mousemove touchend").off("mouseup touchend")
             dragging = false
         }
     }
 })
+function getX(e){
+    var x = e.clientX
+    if (x!=null) return x
+    else return e.touches[0].clientX
+}
+function getY(e){
+    var x = e.clientY
+    if (x!=null) return x
+    else return e.touches[0].clientY
+}
 $(window).resize(()=>{
     h = window.innerHeight-40
     var nw = window.innerWidth-40
