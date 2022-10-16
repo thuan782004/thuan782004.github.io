@@ -8,20 +8,16 @@ $(document).ready(()=>{
     setInterval(tick, 20); 
     $(".ball").on("mousedown touchstart",start)
     function start(e) {
-        getX(e)
-        console.log(e)
         $("html").on("mousemove touchmove",drag).on("mouseup touchend",stop)
         dragging = true; drag(e) 
         vx = 0; vy = 0;
         cx = getX(e)-20;
         cy = getY(e)-20;
         function drag(e){
-            // console.log("move")
             $(".ball").css("top",getY(e)-20+"px")
             $(".ball").css("left",getX(e)-20+"px")
         }
         function stop(){
-            console.log("end")
             $("html").off("mousemove touchmove").off("mouseup touchend")
             dragging = false
         }
