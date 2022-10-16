@@ -8,7 +8,7 @@ $(document).ready(()=>{
     setInterval(tick, 20); 
     $(".ball").on("mousedown touchstart",start)
     function start(e) {
-        $(window).on("mousemove",drag).on("mouseup",stop)
+        $(window).on("mousemove touchmove",drag).on("mouseup touchend",stop)
         dragging = true; drag(e) 
         vx = 0; vy = 0;
         cx = e.clientX-20;
@@ -18,7 +18,7 @@ $(document).ready(()=>{
             $(".ball").css("left",e.clientX-20+"px")
         }
         function stop(){
-            $(window).off("mousemove").off("mouseup")
+            $(window).off("mousemove touchend").off("mouseup touchend")
             dragging = false
         }
     }
