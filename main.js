@@ -6,8 +6,7 @@ $(document).ready(()=>{
     h = window.innerHeight-40
     w = window.innerWidth-40
     setInterval(tick, 20); 
-    $(".ball").on("mousedown",start)
-    $(".ball").on("touchstart",start)
+    $(".ball").on("mousedown touchstart",start)
     function start(e) {
         $(this).on("mousemove",drag).on("mouseup",stop)
         dragging = true; drag(e) 
